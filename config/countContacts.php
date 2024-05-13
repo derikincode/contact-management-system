@@ -1,5 +1,5 @@
 <?php
-include './config/dbConnection.php';
+include 'dbConnection.php';
 
 // Verifica se há erro na conexão
 if ($connection->connect_error) {

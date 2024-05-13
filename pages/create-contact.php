@@ -1,24 +1,55 @@
+<?php
+include '../config/db_connection.php'; // inclui o arquivo de conexão
+
+// Verifica se os dados foram enviados via POST
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Captura os dados do formulário
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+
+    // Prepara a declaração SQL para inserção de dados
+    $sql = "INSERT INTO contact (user, email, phone) VALUES (?, ?, ?)";
+
+    // Prepara a declaração
+    if ($stmt = $connection->prepare($sql)) {
+        // Vincula parâmetros à declaração
+        $stmt->bind_param("sss", $name, $email, $phone);
+
+        // Executa a declaração
+        if ($stmt->execute()) {
+            echo "Contato adicionado com sucesso!";
+        } else {
+            echo "Erro ao adicionar contato: " . $stmt->error;
+        }
+
+        // Fecha a declaração
+        $stmt->close();
+    } else {
+        echo "Erro na preparação da declaração: " . $connection->error;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="icon" href="./assets/img/Contacts-icon.png" type="image/png">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="icon" href="../assets/img/Contacts-icon.png" type="image/png">
     <title>Contatos do Celular</title>
 </head>
 <body>
     <header>
         <span class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></span> <!-- Ícone do menu hambúrguer -->
         <div class="logo">
-            <a href="#">
-              <span class="material-symbols-outlined">search</span>
-                <img class="icon-img" src="./assets/img/Contacts-icon.png" alt="">
+            <a href="../index.php">
+                <img class="icon-img" src="../assets/img/Contacts-icon.png" alt="">
                 <span>Contatos</span>
             </a>
         </div>
         <input type="text" class="search-bar" placeholder="Pesquisar">
-
         <label class="theme-switch">
             <input type="checkbox" class="theme-switch__checkbox">
             <div class="theme-switch__container">
@@ -41,20 +72,36 @@
           </label>
     </header>
     <main>
-        <nav id="main-nav">
+        <nav id="main-nav"> <!-- Adicionando um id ao nav -->
             <ul>
-                <a href="./pages/create-contact.html">
+                <a href="./create-contact.php">
                     <button class="create-new-contact-button">Criar contato</button>
                 </a>
             </ul>
         </nav>
         <div class="content">
             <div class="content-background">
-                <h2>Conteúdo Principal</h2>
-                <p>Bem-vindo ao meu site!</p>
+                <form action="./create-contact.php" method="POST"> <!-- Adicionando um formulário -->
+                    <div class="inputGroup">
+                        <span class="material-symbols-outlined">person</span>
+                        <input type="text" name="name" required="" autocomplete="off">
+                        <label for="name">Nome</label>
+                    </div>
+                    <div class="inputGroup">
+                        <span class="material-symbols-outlined">mail</span>
+                        <input type="text" name="email" required="" autocomplete="off">
+                        <label for="email">E-mail</label>
+                    </div>
+                    <div class="inputGroup">
+                        <span class="material-symbols-outlined" id="call">call</span>
+                        <input type="text" name="phone" required="" autocomplete="off">
+                        <label for="phone">Telefone</label>
+                    </div>
+                    <button type="submit">Enviar</button> <!-- Botão de envio -->
+                </form>
             </div>
         </div>
     </main>
-    <script src="./assets/js/script.js"></script>
+    <script src="../assets/js/script.js"></script>
 </body>
 </html>

@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="icon" href="../assets/img/Contacts-icon.png" type="image/png">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="icon" href="./assets/img/Contacts-icon.png" type="image/png">
     <title>Contatos do Celular</title>
 </head>
 <body>
     <header>
         <span class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></span> <!-- Ícone do menu hambúrguer -->
         <div class="logo">
-            <a href="../index.html">
-                <img class="icon-img" src="../assets/img/Contacts-icon.png" alt="">
+            <a href="#">
+              <span class="material-symbols-outlined">search</span>
+                <img class="icon-img" src="./assets/img/Contacts-icon.png" alt="">
                 <span>Contatos</span>
             </a>
         </div>
         <input type="text" class="search-bar" placeholder="Pesquisar">
+
         <label class="theme-switch">
             <input type="checkbox" class="theme-switch__checkbox">
             <div class="theme-switch__container">
@@ -39,36 +41,84 @@
           </label>
     </header>
     <main>
-        <nav id="main-nav"> <!-- Adicionando um id ao nav -->
+        <nav id="main-nav">
             <ul>
-                <a href="./create-contact.html">
+                <a href="./pages/create-contact.php">
                     <button class="create-new-contact-button">Criar contato</button>
                 </a>
             </ul>
         </nav>
         <div class="content">
             <div class="content-background">
-                <form action="./create-contact.html" method="POST"> <!-- Adicionando um formulário -->
-                    <div class="inputGroup">
-                        <span class="material-symbols-outlined">person</span>
-                        <input type="text" name="nome" required="" autocomplete="off">
-                        <label for="name">Nome</label>
-                    </div>
-                    <div class="inputGroup">
-                        <span class="material-symbols-outlined">mail</span>
-                        <input type="text" name="email" required="" autocomplete="off">
-                        <label for="email">E-mail</label>
-                    </div>
-                    <div class="inputGroup">
-                        <span class="material-symbols-outlined" id="call">call</span>
-                        <input type="text" name="telefone" required="" autocomplete="off">
-                        <label for="text">Telefone</label>
-                    </div>
-                    <button type="submit">Enviar</button> <!-- Botão de envio -->
-                </form>
+                <?php
+                include './config/db_connection.php';
+
+                // Verifica se há erro na conexão
+                if ($connection->connect_error) {
+                    die("Erro de conexão: " . $connection->connect_error);
+                }
+                
+                // Consulta SQL para contar o número de contatos
+                $sql = "SELECT COUNT(*) AS total FROM contact";
+                $resultado = $connection->query($sql);
+                
+                if ($resultado->num_rows > 0) {
+                    // Extrai o resultado da consulta
+                    $row = $resultado->fetch_assoc();
+                    $total_contatos = $row['total'];
+                } else {
+                    // Se nenhum contato for encontrado, define o total como 0
+                    $total_contatos = 0;
+                }
+                
+                // Fecha a conexão com o banco de dados
+                $connection->close();
+                ?>
+                <h2>Contatos (<?php echo $total_contatos; ?>)</h2>
+                <table>
+                  <thead>
+                      <tr>
+                          <th>Nome</th>
+                          <th>Email</th>
+                          <th>Telefone</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <?php
+                      // Conexão com o banco de dados
+                      include './config/db_connection.php';
+
+                      // Verifica se há erro na conexão
+                      if ($connection->connect_error) {
+                          die("Erro de conexão: " . $connection->connect_error);
+                      }
+
+                      // Consulta SQL para selecionar os usuários
+                      $sql = "SELECT user, email, phone FROM contact";
+                      $resultado = $connection->query($sql);
+
+
+                      if ($resultado->num_rows > 0) {
+                          // Itera sobre os resultados e os exibe na tabela
+                          while ($row = $resultado->fetch_assoc()) {
+                              echo "<tr>";
+                              echo "<td data-label='Nome'>" . $row['user'] . "</td>";
+                              echo "<td data-label='Email'>" . $row['email'] . "</td>";
+                              echo "<td data-label='Telefone'>" . $row['phone'] . "</td>";
+                              echo "</tr>";
+                          }
+                      } else {
+                          echo "<tr><td colspan='3'>Nenhum usuário encontrado.</td></tr>";
+                      }
+
+                      // Fecha a conexão com o banco de dados
+                      $connection->close();
+                      ?>
+                  </tbody>
+              </table>
             </div>
         </div>
     </main>
-    <script src="../assets/js/script.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>

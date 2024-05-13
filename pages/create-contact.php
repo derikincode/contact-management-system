@@ -1,5 +1,5 @@
 <?php
-include '../config/db_connection.php'; // inclui o arquivo de conexão
+include '../config/dbConnection.php'; // inclui o arquivo de conexão
 
 // Verifica se os dados foram enviados via POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

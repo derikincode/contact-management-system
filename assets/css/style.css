@@ -48,9 +48,9 @@ header {
     font-size: 25px;
 }
 
-.logo a:hover {
+/* .logo a:hover {
     color: var(--logo-text-hover-color);
-}
+} */
 
 .icon-img {
     width: 50px;

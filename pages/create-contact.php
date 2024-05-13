@@ -54,12 +54,12 @@ include '../config/addContact.php';
             <div class="content-background">
                 <form action="./create-contact.php" method="POST"> <!-- Adicionando um formulário -->
                     <div class="inputGroup">
-                        <span class="material-symbols-outlined">person</span>
+                        <span class="material-symbols-outlined" id="person">person</span>
                         <input type="text" name="name" required="" autocomplete="off">
                         <label for="name">Nome</label>
                     </div>
                     <div class="inputGroup">
-                        <span class="material-symbols-outlined">mail</span>
+                        <span class="material-symbols-outlined" id="mail">mail</span>
                         <input type="text" name="email" required="" autocomplete="off">
                         <label for="email">E-mail</label>
                     </div>

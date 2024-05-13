@@ -15,7 +15,7 @@ include './config/countContacts.php';
         <span class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></span> <!-- Ícone do menu hambúrguer -->
         <div class="logo">
             <a href="#">
-                <span class="material-symbols-outlined">search</span>
+                <!-- <span class="material-symbols-outlined">search</span> -->
                 <img class="icon-img" src="./assets/img/Contacts-icon.png" alt="">
                 <span>Contatos</span>
             </a>

@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("sss", $name, $email, $phone);
 
         if ($stmt->execute()) {
-            echo "Contato adicionado com sucesso!";
+            echo '<p>Novo contato criado</p>';
         } else {
             echo "Erro ao adicionar contato: " . $stmt->error;
         }

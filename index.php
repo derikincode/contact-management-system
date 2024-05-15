@@ -57,8 +57,8 @@ include './config/countContacts.php';
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Email</th>
-                            <th>Telefone</th>
+                            <th>E-mail</th>
+                            <th>Número de telefone</th>
                         </tr>
                     </thead>
                     <tbody>

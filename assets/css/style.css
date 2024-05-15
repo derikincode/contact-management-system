@@ -542,12 +542,18 @@ table {
   margin-top: 20px;
 }
 
-th, td {
-  border: 1px solid #ddd;
+th {
+  padding: 10px;
+  text-align: left;
+  /* border-bottom: 1px solid #c4c7c5; */
+}
+td {
   padding: 8px;
   text-align: left;
+  /* border-bottom: 1px solid #c4c7c5; */
 }
 
 th {
   background-color: #f2f2f2;
 }
+

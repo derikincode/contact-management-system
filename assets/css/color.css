@@ -1,0 +1,12 @@
+:root {
+    --main-bg-color: #f8fafd;
+    --main-text-color: #5f6368;
+    --logo-text-hover-color: #333;
+    --search-bar-bg-color: #f1f3f4;
+    --create-button-bg-color: #C2E7FF;
+    --create-button-text-color: #001D35;
+    --create-button-hover-shadow: rgba(9, 9, 9, 0.41);
+    --bg: white; /* Cor de fundo padrão */
+    --primary: #007bff; /* Cor primária */
+    --primaryT: rgba(0, 123, 255, 0.25); /* Cor de realce primária */
+}

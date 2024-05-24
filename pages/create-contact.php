@@ -52,11 +52,23 @@ include '../config/addContact.php';
         </nav>
         <div class="content">
             <div class="content-background">
+                <div class="iconAvatar">
+            <img class="iconAvatar" src="../assets/img/photo_silhouette.png" alt="">
+            </div>
                 <form action="./create-contact.php" method="POST"> <!-- Adicionando um formulário -->
                     <div class="inputGroup">
                         <span class="material-symbols-outlined" id="person">person</span>
-                        <input type="text" name="name" required="" autocomplete="off">
+                        <input type="text" name="name" required="true" autocomplete="off">
                         <label for="name">Nome</label>
+                    </div>
+                    <div class="inputGroup">
+                        <span class="material-symbols-outlined" id="company">domain</span>
+                        <input type="text" name="company" required="" autocomplete="off">
+                        <label for="company">Empresa</label>
+                    </div>
+                    <div class="inputGroup">
+                        <input type="text" name="Office" required="" autocomplete="off">
+                        <label for="Office">Cargo</label>
                     </div>
                     <div class="inputGroup">
                         <span class="material-symbols-outlined" id="mail">mail</span>
@@ -68,7 +80,12 @@ include '../config/addContact.php';
                         <input type="text" name="phone" required="" autocomplete="off">
                         <label for="phone">Telefone</label>
                     </div>
-                    <button type="submit">Enviar</button> <!-- Botão de envio -->
+                    <div class="buttonReset">
+                        <button type="reset">Cancelar</button>
+                    </div>
+                    <div class="buttonSave">
+                    <button type="submit">Salvar</button> <!-- Botão de envio -->
+                    </div>
                 </form>
             </div>
         </div>
